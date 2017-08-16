@@ -5,7 +5,7 @@
 #include "Configuration_prusa.h"
 
 // Firmware version
-#define FW_version "3.0.12-2"
+#define FW_version "3.0.12-3"
 
 #define FW_PRUSA3D_MAGIC "PRUSA3DFW"
 #define FW_PRUSA3D_MAGIC_LEN 10
@@ -47,6 +47,8 @@
 #define EEPROM_TEMP_CAL_ACTIVE (EEPROM_PROBE_TEMP_SHIFT - 1)
 #define EEPROM_BOWDEN_LENGTH (EEPROM_TEMP_CAL_ACTIVE - 2*4) //4 x int for bowden lengths for multimaterial
 #define EEPROM_CALIBRATION_STATUS_PINDA (EEPROM_BOWDEN_LENGTH - 1) //0 - not calibrated; 1 - calibrated
+#define EEPROM_SD_SORT (EEPROM_CALIBRATION_STATUS_PINDA - 1) //0 -time, 1-alpha, 2-none
+#define EEPROM_XYZ_CAL_SKEW (EEPROM_SD_SORT - 4)
 
 // Currently running firmware, each digit stored as uint16_t.
 // The flavor differentiates a dev, alpha, beta, release candidate or a release version.
@@ -171,6 +173,10 @@
 //if PREVENT_DANGEROUS_EXTRUDE is on, you can still disable (uncomment) very long bits of extrusion separately.
 #define PREVENT_LENGTHY_EXTRUDE
 
+#ifdef DEBUG_DISABLE_PREVENT_EXTRUDER
+#undef PREVENT_DANGEROUS_EXTRUDE
+#undef PREVENT_LENGTHY_EXTRUDE
+#endif //DEBUG_DISABLE_PREVENT_EXTRUDER
 
 #define EXTRUDE_MAXLENGTH (X_MAX_LENGTH+Y_MAX_LENGTH) //prevent extrusion of very large distances.
 
@@ -280,9 +286,13 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define Y_HOME_DIR -1
 #define Z_HOME_DIR -1
 
+#ifdef DEBUG_DISABLE_SWLIMITS
+#define min_software_endstops false
+#define max_software_endstops false
+#else
 #define min_software_endstops true // If true, axis won't move to coordinates less than HOME_POS.
 #define max_software_endstops true  // If true, axis won't move to coordinates greater than the defined lengths below.
-
+#endif //DEBUG_DISABLE_SWLIMITS
 
 
 #define X_MAX_LENGTH (X_MAX_POS - X_MIN_POS)
