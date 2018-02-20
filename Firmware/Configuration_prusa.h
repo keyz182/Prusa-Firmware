@@ -36,7 +36,7 @@ AXIS SETTINGS
 #ifdef SNMM
 #define DEFAULT_AXIS_STEPS_PER_UNIT   {100,100,3200/8,140}
 #else
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {100,100,3200/8,881}
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {100,100,3200/8,161.3}
 #endif
 
 
@@ -46,17 +46,17 @@ const bool Y_MIN_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 const bool Z_MIN_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
 
 // Home position
-#define MANUAL_X_HOME_POS -5
-#define MANUAL_Y_HOME_POS -20.43
-#define MANUAL_Z_HOME_POS 0
+#define MANUAL_X_HOME_POS -10
+#define MANUAL_Y_HOME_POS -2.2
+#define MANUAL_Z_HOME_POS 0.15
 
 // Travel limits after homing
 #define X_MAX_POS 250
-#define X_MIN_POS -2
+#define X_MIN_POS 2
 #define Y_MAX_POS 210
-#define Y_MIN_POS -20.43
-#define Z_MAX_POS 200 //210
-#define Z_MIN_POS 0
+#define Y_MIN_POS -8.2
+#define Z_MAX_POS 201 //210
+#define Z_MIN_POS 0.15
 
 // Canceled home position
 #define X_CANCEL_POS 50
@@ -194,8 +194,8 @@ MOTOR CURRENT SETTINGS
 // Motor Current settings for RAMBo mini PWM value = MotorCurrentSetting * 255 / range
 #if MOTHERBOARD == 102 || MOTHERBOARD == 302
 #define MOTOR_CURRENT_PWM_RANGE 2000
-#define DEFAULT_PWM_MOTOR_CURRENT  {400, 1800, 1250} // {XY,Z,E}
-#define DEFAULT_PWM_MOTOR_CURRENT_LOUD  {1000, 2000, 1500} // {XY,Z,E}
+#define DEFAULT_PWM_MOTOR_CURRENT  {550, 1600, 1200} // {XY,Z,E}
+#define DEFAULT_PWM_MOTOR_CURRENT_LOUD  {750, 1800, 1200} // {XY,Z,E}
 #endif
 
 /*------------------------------------
@@ -224,8 +224,8 @@ BED SETTINGS
 #define MESH_HOME_Z_CALIB 0.2
 #define MESH_HOME_Z_SEARCH 5 //Z lift for homing, mesh bed leveling etc.
 
-#define X_PROBE_OFFSET_FROM_EXTRUDER 13     // Z probe to nozzle X offset: -left  +right
-#define Y_PROBE_OFFSET_FROM_EXTRUDER 23     // Z probe to nozzle Y offset: -front +behind
+#define X_PROBE_OFFSET_FROM_EXTRUDER 23     // Z probe to nozzle X offset: -left  +right
+#define Y_PROBE_OFFSET_FROM_EXTRUDER 9     // Z probe to nozzle Y offset: -front +behind
 #define Z_PROBE_OFFSET_FROM_EXTRUDER -0.4  // Z probe to nozzle Z offset: -below (always!)
 #endif
 
